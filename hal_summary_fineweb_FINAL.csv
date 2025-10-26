@@ -1,0 +1,3 @@
+source_path,variant,supported,total,unsupported,hallucination_rate_%
+vanilla_harmful,neutral,6.0,294,288.0,97.95918367346938
+vanilla_harmful,with_citation,4.0,284,280.0,98.59154929577466
