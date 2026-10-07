@@ -6,9 +6,9 @@ from transformers import pipeline
 parser = argparse.ArgumentParser()
 parser.add_argument("--manifest", default="prompts_manifest.csv")
 parser.add_argument("--out", default="completions.jsonl")
-parser.add_argument("--model", default="mistralai/Mistral-7B-Instruct-v0.3")
+parser.add_argument("--model", default="TinyLlama/TinyLlama-1.1B-Chat-v1.0")
 parser.add_argument("--workers", type=int, default=2)   # lower if GPU OOM
-parser.add_argument("--max_new_tokens", type=int, default=512)
+parser.add_argument("--max_new_tokens", type=int, default=128)
 args = parser.parse_args()
 
 print("Loading generation model:", args.model)
