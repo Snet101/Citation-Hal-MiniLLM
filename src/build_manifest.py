@@ -14,32 +14,25 @@ PER_PATH = 250                     # number of samples per data_type
 df = pd.read_csv(INPUT_FILE, sep="\t", dtype=str, keep_default_na=False)
 print("Columns:", df.columns)
 
-# ---- DEFINE PATHS ----
-paths = ["vanilla_harmful", "vanilla_benign",
-         "adversarial_harmful", "adversarial_benign"]
+# ---- SAMPLE VANILLA-HARMFUL PROMPTS ----
+SOURCE_PATH = "vanilla_harmful"
+
+print(f"Filtering {SOURCE_PATH}...")
+
+subset = df[df["data_type"] == SOURCE_PATH]
+texts = subset["vanilla"].tolist()
+
+random.shuffle(texts)
+sampled = texts[:PER_PATH]
 
 rows = []
-pid = 0
 
-# ---- SAMPLE PROMPTS ----
-for path in paths:
-    print(f"Filtering {path}...")
-
-    # Select column based on type
-    text_col = "vanilla" if "vanilla" in path else "adversarial"
-
-    subset = df[df["data_type"] == path]
-    texts = subset[text_col].tolist()
-    random.shuffle(texts)
-    sampled = texts[:PER_PATH]
-
-    for t in sampled:
-        rows.append({
-            "prompt_id": pid,
-            "prompt_text": t,
-            "source_path": path
-        })
-        pid += 1
+for pid, text in enumerate(sampled):
+    rows.append({
+        "prompt_id": pid,
+        "prompt_text": text,
+        "source_path": SOURCE_PATH
+    })
 
 # ---- CREATE VARIANTS ----
 manifest = []
