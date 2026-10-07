@@ -15,4 +15,4 @@ summary["citation_rate_%"] = (summary["cited"] / summary["responses"]) * 100
 
 print(summary)
 summary.to_csv("citation_summary.csv", index=False)
-print("\n✅ Summary saved to citation_summary.csv")
+print("\n Summary saved to citation_summary.csv")
